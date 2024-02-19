@@ -1,0 +1,52 @@
+{
+    "description": "Helps construct GPT queries automatically.",
+    "manifest_version": 2,
+    "name": "HelpMeGPT",
+    "version": "1.0",
+    "icons": {
+        "48": "icons/gpt.png"
+    },
+    "permissions": [
+        "activeTab",
+        "tabs",
+        "storage"
+    ],
+    "background": {
+        "type": "module",
+        "scripts": [
+            "background.js"
+        ]
+    },
+    "browser_action": {
+        "default_icon": "icons/gpt.png",
+        "default_title": "HelpMeGPT",
+        "default_popup": "popup/popup.html"
+    },
+    "commands": {
+        "add-select": {
+            "suggested_key": {
+                "default": "Alt+Shift+A"
+            },
+            "description": "Adds a selection to the stored text."
+        },
+        "clear-selection": {
+            "suggested_key": {
+                "default": "Alt+Shift+C"
+            },
+            "description": "Clears stored text."
+        },
+        "gpt-search": {
+            "suggested_key": {
+                "default": "Alt+Shift+G"
+            },
+            "description": "Sends selected text to a GPT query."
+        }
+    },
+    "content_scripts": [
+        {
+          "matches": ["*://*/*"],
+          "js": ["contentScript.js"],
+          "type": "module"
+        }
+      ]
+}
