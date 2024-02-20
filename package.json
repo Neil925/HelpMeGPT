@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "web-ext run --source-dir ./build/",
-    "build": "rm -r build && tsc && rsync -a src/ build/ --exclude=*.ts",
+    "build": "rm -r build; tsc && rsync -a src/ build/ --exclude=*.ts",
     "lint": "web-ext lint",
     "ext-build": "web-ext build --source-dir ./build/",
     "sign": "web-ext sign --source-dir ./build/"
