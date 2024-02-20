@@ -1,6 +1,8 @@
 const className = "help-highlight";
 let highlight = false;
+let massSelect = false;
 let highlighted: HTMLElement[] = [];
+let mousePos: number[] = [];
 
 browser.storage.local.onChanged.addListener(ev => {
     let update = ev?.HelpMeData?.newValue?.selectMode;
@@ -9,11 +11,29 @@ browser.storage.local.onChanged.addListener(ev => {
         return;
 
     highlight = update;
+    massSelect = ev?.HelpMeData?.newValue?.massSelect ?? false;
 
     for (let el of highlighted)
         el.classList.remove(className);
 
     highlighted = [];
+    let element = document.elementFromPoint(mousePos[0], mousePos[1]);
+
+    if (highlight) {
+        if (element instanceof HTMLElement)
+            add(element);
+
+        const removeList = (children: HTMLCollection) => {
+            for (let el of children) {
+                (el as HTMLElement).onclick = null;
+                if (el.children.length)
+                    removeList(el.children)
+            }
+
+        }
+
+        removeList(document.children)
+    }
 });
 
 var style = document.createElement('style');
@@ -49,12 +69,15 @@ function handleMouseOut(ev: MouseEvent) {
 async function handleClick(this: Document, ev: MouseEvent) {
     if (!highlight || !(ev.target instanceof HTMLElement) || !highlighted.includes(ev.target))
         return;
-    
+
     ev.preventDefault();
+    ev.stopPropagation();
 
     let helpMeData = (await browser.storage.local.get("HelpMeData")).HelpMeData as HelpMeData;
-    helpMeData.selectMode = false;
-    
+
+    if (!massSelect)
+        helpMeData.selectMode = false;
+
     helpMeData.selections.push(ev.target.innerText);
 
     await browser.storage.local.remove("HelpMeData");
@@ -64,3 +87,12 @@ async function handleClick(this: Document, ev: MouseEvent) {
 document.addEventListener("mouseover", handleMouseOver);
 document.addEventListener("mouseout", handleMouseOut);
 document.addEventListener("click", handleClick);
+document.addEventListener("mousemove", handleMouseMove);
+
+function handleMouseMove(this: Document, ev: MouseEvent) {
+    if (highlight)
+        return;
+
+    mousePos[0] = ev.pageX;
+    mousePos[1] = ev.pageY;
+}

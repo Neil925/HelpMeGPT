@@ -16,11 +16,14 @@ export default class GptSearch implements ICommand {
         }
 
         let preface = "For this question and the ones to follow in this chat thread, please keep in mind the following:\n";
-        preface += "- So long as one of the options presented is a valid answer, do not go into detail with your response and simply let me know which one you believe is correct.\n";
-        preface += "- If no extra options are presented and a question can be answered as either \"True\" / \"False\", then please do so.\n";
-        preface += "\nHere is the first question: \n";
+        preface += "- So long as options are presented that act as valid answers to the question, do not go into detail with your response and simply let me know which one you believe is correct.\n";
+        preface += "- If you feel a degree of certainty that none of the options presented are accurate, please say so.\n"
+        preface += '- If no extra options are presented and a question can be answered as either "True" / "False", then please do so.\n';
+        preface += '- If a "fill in the blank" type question is asked, please provide your best guess and a percentage of your certainty in parentheses next to it.\n';
+        preface += "\nHere is the first question:";
 
         helpMeData.selections.unshift(preface);
+        helpMeData.massSelect = helpMeData.selectMode = false;
 
         await browser.storage.local.remove("HelpMeData");
         await browser.storage.local.set({ HelpMeData: helpMeData });

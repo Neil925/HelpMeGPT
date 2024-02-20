@@ -1,16 +1,19 @@
 import AddSelection from "./commands/addSelection.js";
 import ClearSelection from "./commands/clearSelection.js";
 import GptSearch from "./commands/gptSearch.js";
+import MassSelect from "./commands/massSelect.js";
 
 const commands: ICommand[] = [
     new AddSelection(),
     new ClearSelection(),
-    new GptSearch()
+    new GptSearch(),
+    new MassSelect()
 ];
 
 async function main() {
     let helpMeData = {
-        selectMode: true,
+        selectMode: false,
+        massSelect: false,
         selections: []
     } as HelpMeData;
 

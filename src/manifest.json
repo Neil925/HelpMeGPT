@@ -29,6 +29,12 @@
             },
             "description": "Adds a selection to the stored text."
         },
+        "mass-select": {
+            "suggested_key": {
+                "default": "Alt+Shift+A"
+            },
+            "description": "Adds repeated selections until toggled back off."
+        },
         "clear-selection": {
             "suggested_key": {
                 "default": "Alt+C"
