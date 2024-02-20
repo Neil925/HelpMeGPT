@@ -4,6 +4,6 @@ interface ICommand {
 }
 
 interface HelpMeData {
-    selectMode: boolean;
-    selections: string[]
+    selectMode: boolean,
+    selections: string[],
 }

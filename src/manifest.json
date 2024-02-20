@@ -25,13 +25,13 @@
     "commands": {
         "add-select": {
             "suggested_key": {
-                "default": "Alt+Shift+A"
+                "default": "Alt+A"
             },
             "description": "Adds a selection to the stored text."
         },
         "clear-selection": {
             "suggested_key": {
-                "default": "Alt+Shift+C"
+                "default": "Alt+C"
             },
             "description": "Clears stored text."
         },
@@ -45,8 +45,11 @@
     "content_scripts": [
         {
           "matches": ["*://*/*"],
-          "js": ["contentScript.js"],
-          "type": "module"
-        }
+          "js": ["content-scripts/highlight.js"]
+        },
+        {
+            "matches": ["https://chat.openai.com/*"],
+            "js": ["content-scripts/autoAskGpt.js"]
+          }
       ]
 }
