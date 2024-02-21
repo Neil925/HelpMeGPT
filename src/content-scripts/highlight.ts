@@ -23,16 +23,16 @@ browser.storage.local.onChanged.addListener(ev => {
         if (element instanceof HTMLElement)
             add(element);
 
-        const removeList = (children: HTMLCollection) => {
-            for (let el of children) {
-                (el as HTMLElement).onclick = null;
-                if (el.children.length)
-                    removeList(el.children)
-            }
+        // const removeList = (children: HTMLCollection) => {
+        //     for (let el of children) {
+        //         (el as HTMLElement).onclick = null;
+        //         if (el.children.length)
+        //             removeList(el.children)
+        //     }
 
-        }
+        // }
 
-        removeList(document.children)
+        // removeList(document.children)
     }
 });
 

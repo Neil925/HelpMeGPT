@@ -22,8 +22,9 @@ export default class GptSearch implements ICommand {
         preface += '- If a "fill in the blank" type question is asked, please provide your best guess and a percentage of your certainty in parentheses next to it.\n';
         preface += "\nHere is the first question:";
 
+        helpMeData.selectMode = false;
+        helpMeData.massSelect = false;
         helpMeData.selections.unshift(preface);
-        helpMeData.massSelect = helpMeData.selectMode = false;
 
         await browser.storage.local.remove("HelpMeData");
         await browser.storage.local.set({ HelpMeData: helpMeData });

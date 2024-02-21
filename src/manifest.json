@@ -51,7 +51,8 @@
     "content_scripts": [
         {
           "matches": ["*://*/*"],
-          "js": ["content-scripts/highlight.js"]
+          "js": ["content-scripts/highlight.js"],
+          "all_frames": true
         },
         {
             "matches": ["https://chat.openai.com/*"],
