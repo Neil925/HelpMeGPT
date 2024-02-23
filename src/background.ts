@@ -32,8 +32,15 @@ async function main() {
 
     for (let command of commands) {
         browser.commands.onCommand.addListener(async (commandName) => {
-            if (command.name == commandName)
+            if (command.name != commandName) return;
+
+            try {
                 await command.exec();
+            } catch (error) {
+                await browser.action.openPopup();
+                console.error(`Something went wrong with execution of command: ${commandName}.`);
+                console.error(error);
+            }
         });
 
         console.log(`Event ${command.name} has been subscribed.`);

@@ -9,12 +9,20 @@
 <body>
     <h1>How to help?</h1>
     <br />
-    <div class="selectOptions">
-        <button class="addSelect" onclick="">Add Selection</button>
-        <button class="clearSelection" onclick="">Clear Selection</button>
+    <div class="flex-col">
+        <div>
+            <h3>Current Selections:</h3>
+            <textarea name="selections" id="selections-area" cols="30" rows="10" />
+            <button class="updateSelections" onclick="textAreaSubmit">Update Selections</button>
+        </div>
+        <div class="selectOptions flex-row">
+            <button class="addSelect" onclick="">Add Selection</button>
+            <button class="massSelect" onclick="">Add Selection</button>
+            <button class="clearSelection" onclick="">Clear Selection</button>
+        </div>
+        <br />
+        <button class="AskGPT" onclick="">Ask GPT</button>
     </div>
-    <br />
-    <button class="AskGPT" onclick="">Ask GPT</button>
 
     <script src="./popup.js"></script>
 </body>
