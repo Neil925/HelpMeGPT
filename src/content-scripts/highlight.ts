@@ -72,6 +72,7 @@ async function handleClick(this: Document, ev: MouseEvent) {
 
     ev.preventDefault();
     ev.stopPropagation();
+    ev.stopImmediatePropagation();
 
     let helpMeData = (await browser.storage.local.get("HelpMeData")).HelpMeData as HelpMeData;
 
@@ -86,7 +87,7 @@ async function handleClick(this: Document, ev: MouseEvent) {
 
 document.addEventListener("mouseover", handleMouseOver);
 document.addEventListener("mouseout", handleMouseOut);
-document.addEventListener("click", handleClick);
+document.addEventListener("click", handleClick, true);
 document.addEventListener("mousemove", handleMouseMove);
 
 function handleMouseMove(this: Document, ev: MouseEvent) {

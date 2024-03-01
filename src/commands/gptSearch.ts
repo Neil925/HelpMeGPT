@@ -29,5 +29,7 @@ export default class GptSearch implements ICommand {
         helpMeData.massSelect = false;
         await browser.storage.local.remove("HelpMeData");
         await browser.storage.local.set({ HelpMeData: helpMeData });
+
+        await browser.tabs.executeScript(tab.id, { file: "../scriplets/autoAskGpt.js" });
     }
 }
